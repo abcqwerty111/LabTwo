@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Последние статьи{% endblock %}
+
+{% block content %}
+	{% if latest_articles_list %}
+
+	
+{% if user.is_authenticated %}
+<p style="background-color:#23094B; font-family:courier; font-size:160%; color:white;">Привет, {{ user.username }}
+		<a href="{% url 'logout' %}" style="text-decoration: none;color:grey;width: 10%;float:right;">Выйти</a>
+		
+	{% endif %}
+	<h2 style="background-color:#23094B; font-family:courier; font-size:160%; color:white;">Блоги</h2>
+		{% for a in latest_articles_list %}
+			<a href="{% url 'articles:detail' a.id %}" style="text-decoration: none;font-family:courier; font-size:140%; color:#23094B;display:flex;"><h3>{{a.article_title}}</h3></a>
+		{% endfor %}
+ 	{% else %}
+		Статьи не найдены
+	{% endif %}
+
+{% endblock %}
